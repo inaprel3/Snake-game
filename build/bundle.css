@@ -1,0 +1,5 @@
+main.svelte-131o2on{background-image:url("../cursova.jpg");background-size:cover;width:1300px;height:600px;border:solid rgb(15, 69, 0) 5px;position:relative;margin:20px auto}h1.svelte-131o2on{text-align:center}
+.body-snake.svelte-15rl3i6{position:absolute;background-color:rgb(128, 20, 178);border:rgb(5, 55, 0) 3px solid;border-radius:60%;width:50px;height:50px;z-index:4}.eyes.svelte-15rl3i6{position:absolute;background-color:rgb(255, 217, 0);border-radius:60%;width:25%;height:25%}#rightEye.svelte-15rl3i6{left:75%;bottom:20%}#leftEye.svelte-15rl3i6{left:75%;top:20%}.body-snake.up.svelte-15rl3i6{transform:rotate(250deg)}.body-snake.right.svelte-15rl3i6{transform:rotate(10deg)}.body-snake.down.svelte-15rl3i6{transform:rotate(80deg)}.body-snake.left.svelte-15rl3i6{transform:rotate(150deg)}
+.fruit.svelte-1exm24u{position:absolute;border:solid black 2px;background-color:rgb(255, 0, 85);width:50px;height:50px;z-index:0}
+
+/*# sourceMappingURL=bundle.css.map */
