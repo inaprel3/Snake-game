@@ -6,56 +6,48 @@
   let fruitTop = 0;
   let direction = "right";
   $: score = bodiesSnake.length - 3;
-  class IsCollide {
-    isCollide(a, b) {
+  function isCollide(a, b) {
+    return !(
       a.top < b.top ||
       a.top > b.top ||
       a.left < b.left ||
       a.left > b.left
-    }
+    );
   }
-  class MoveFruit {
-    moveFruit() {
-      fruitTop = Math.floor(Math.random() * 12) * 50;
-      fruitLeft = Math.floor(Math.random() * 26) * 50;
-    }
+  function moveFruit() {
+    fruitTop = Math.floor(Math.random() * 12) * 50;
+    fruitLeft = Math.floor(Math.random() * 26) * 50;
   }
-  class ResetGame {
-    constructor() {
-      moveFruit();
-      direction = "right";
-      bodiesSnake = [ { left: 100, top: 0 }, 
-        { left: 50, top: 0 },
-        { left: 0, top: 0 }
-      ];
-    }
+  function resetGame() {
+    moveFruit();
+    direction = "right";
+    bodiesSnake = [ { left: 100, top: 0 }, 
+      { left: 50, top: 0 },
+      { left: 0, top: 0 }
+    ];
   }
-  class GetDirectionFromKeyCode {
-    getDirectionFromKeyCode(keyCode) {
-      if (keyCode === 38) { return "up"; }
-      else if (keyCode === 39) { return "right"; }
-      else if (keyCode === 37) { return "left"; }
-      else if (keyCode === 40) { return "down"; }
-      return false;
-    }
+  function getDirectionFromKeyCode(keyCode) {
+    if (keyCode === 38) { return "up"; }
+    else if (keyCode === 39) { return "right"; }
+    else if (keyCode === 37) { return "left"; }
+    else if (keyCode === 40) { return "down"; }
+    return false;
   }
   function onKeyDown(e) {
-    const newDirection = GetDirectionFromKeyCode(e.keyCode);
-    if (newDirection) {
-      direction = newDirection;
+  const newDirection = getDirectionFromKeyCode(e.keyCode);
+  if (newDirection) {
+    direction = newDirection;
     }
   }
-  class IsGameOver {
-    isGameOver() {
-      const bodiesSnakeNoHead = bodiesSnake.slice(1);
-      const snakeCollisions = bodiesSnakeNoHead.filter(bs =>
-        isCollide(bs, bodiesSnake[0])
-      );
-      if (snakeCollisions.length > 0) { return true; }
-      const { top, left } = bodiesSnake[0];
-      if (top >= 600 || top < 0 || left < 0 || left >= 1300) { return true; }
-      return false;
-    }
+  function isGameOver() {
+    const bodiesSnakeNoHead = bodiesSnake.slice(1);
+    const snakeCollisions = bodiesSnakeNoHead.filter(bs =>
+      isCollide(bs, bodiesSnake[0])
+    );
+    if (snakeCollisions.length > 0) { return true; }
+    const { top, left } = bodiesSnake[0];
+    if (top >= 600 || top < 0 || left < 0 || left >= 1300) { return true; }
+    return false;
   }
   setInterval(() => { 
     bodiesSnake.pop();
@@ -66,13 +58,13 @@
     else if (direction === "left") { left -= 50; }
     const newHead = { left, top };
     bodiesSnake = [newHead, ... bodiesSnake];
-    if (IsCollide(newHead, { left: fruitLeft, top: fruitTop })) {
-      MoveFruit();
+    if (isCollide(newHead, { left: fruitLeft, top: fruitTop })) {
+      moveFruit();
       bodiesSnake = [...bodiesSnake, bodiesSnake [bodiesSnake.length - 1]];
     }
-    if (IsGameOver()) { ResetGame(); }
+    if (isGameOver()) { resetGame(); }
   }, 200);
-  ResetGame();
+  resetGame();
 </script>
 <style>
   main {
